@@ -12,6 +12,7 @@ public class Emp {
     private Double comm;
     private Dept dept;
     public int a;
+    public double b;
 
     public Emp() {
     }
