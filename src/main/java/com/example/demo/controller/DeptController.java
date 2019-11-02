@@ -29,9 +29,11 @@ public class DeptController {
     public String depts(Model model) {
         List<Dept> depts = deptService.findAll();
         depts.forEach(System.out::println);
-
+        System.out.println();
         model.addAttribute("depts", depts);
         return "depts";
+
+
 //        return "help";
     }
 
