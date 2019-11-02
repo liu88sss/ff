@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.demo.mapper.DeptMapper">
+    <resultMap id="deptResultMapper" type="com.example.demo.domain.Dept">
+        <id property="deptNo" column="DEPTNO"/>
+        <result property="deptName" column="DNAME"/>
+        <result property="location" column="LOC"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="deptResultMapper">
+        select * from DEPT
+    </select>
+
+    <delete id="deleteByDeptNo" parameterType="_int">
+        delete from DEPT where DEPTNO=#{deptNo}
+    </delete>
+    <insert id="save" parameterType="com.example.demo.domain.Dept">
+        insert into DEPT(DEPTNO, DNAME, LOC) values (#{deptNo},#{deptName},#{location})
+    </insert>
+
+
+</mapper>

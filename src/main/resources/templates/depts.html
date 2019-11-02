@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/save" method="post">
+    Dept Name<input name="deptNo"/><br>
+    Dept Name<input name="deptName"/><br>
+    Location<input name="location"/><br>
+    <input type="submit" value="ADD">
+</form>
+<table border="1px">
+    <tr th:each="dept : *{depts}">
+        <td th:text="${dept.deptNo}"/>
+        <td th:text="${dept.deptName}"/>
+        <td th:text="${dept.location}"/>
+        <td><a th:href="@{/delete(deptNo=${dept.deptNo})}">DELETE</a></td>
+    </tr>
+</table>
+</body>
+</html>

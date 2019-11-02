@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.EmpMapper">
+    <resultMap id="empResultMapper" type="com.example.demo.domain.Emp">
+        <id property="empNo" column="EMPNO"/>
+        <result property="empName" column="ENAME"/>
+        <result property="job" column="JOB"/>
+        <result property="mgr" column="MGR"/>
+        <result property="hireDate" column="HIREDATE"/>
+        <result property="salary" column="SAL"/>
+        <result property="comm" column="COMM"/>
+        <association property="dept" column="DEPTNO" javaType="com.example.demo.domain.Dept"
+                     jdbcType="INTEGER">
+            <id property="deptNo" column="DEPTNO"/>
+            <result property="deptName" column="DNAME"/>
+            <result property="location" column="LOC"/>
+        </association>
+    </resultMap>
+    <sql id="wodesql">e.EMPNO,e.ENAME,e.JOB,e.MGR,e.HIREDATE,e.SAL,e.COMM,d.DEPTNO,d.DNAME,d.LOC
+    </sql>
+
+    <insert id="save" parameterType="com.example.demo.domain.Emp">
+        insert into EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+        values (#{empNo},#{empName},#{job},#{mgr},#{hireDate},#{salary},#{comm},#{Dept.deptNo})
+    </insert>
+
+    <select id="findAll" resultMap="empResultMapper">
+        select
+        <include refid="wodesql"/>
+        from DEPT d inner join EMP e on d.DEPTNO = e.DEPTNO
+    </select>
+    <select id="findByEmpNo" resultMap="empResultMapper" parameterType="_int">
+        select
+        <include refid="wodesql"/>
+        from DEPT d inner join EMP e on d.DEPTNO = e.DEPTNO
+        where e.EMPNO=#{empNo}
+    </select>
+
+
+</mapper>
